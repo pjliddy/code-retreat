@@ -41,7 +41,7 @@ class Game
     (x_min..x_max).each do |col|
       (y_min..y_max).each do |row|
         # if not center, check is alive
-          if (col != x && row != y) && @board[col][row] == 1
+          if (col != x && row != y) && @board[col][row] == true
             n += 1
           end
       end
@@ -49,20 +49,30 @@ class Game
 
     # total neighbors = n
     # don't return total, evaluate against rules & return T or F
-    result = get_result(n, @board[col][row])
+    result = get_result(n, x, y)
 
 
   end
 
-  def get_result(n, live)
+  def get_result(n, x, y)
+    live = @board[x][y]
+
     if n < 2 && live
-      # die
+      self.die(x,y)
     elsif n > 3 && live
-      #die
+      self.die(x,y)
     elsif (n == 2 || n == 3) && live
-      # live (do nothing)
-    elsif (n == 3 && not live)
-    # live
+      self.live(x,y)
+    elsif n == 3 && !live
+      self.live(x,y)
     end
+  end
+
+  def live(x,y)
+    @board[x][y] = true
+  end
+
+  def die(x,y)
+    @board[x][y] = false
   end
 end
