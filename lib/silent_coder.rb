@@ -7,9 +7,9 @@ class Game
 
   def checkBoard
     @temp_board = @board # copy not reference
-     @board.each_with_index do |x, xi|
+     @temp_board.each_with_index do |x, xi|
       x.each_with_index do |y, yi|
-        checkSquare(xi, yi)
+        @temp_board[xi][yi] = checkSquare(xi, yi)
       end
     end
   end
@@ -48,7 +48,17 @@ class Game
     end
 
     # total neighbors = n
-    # don't return total,
-    n
+    # don't return total, evaluate against rules & return T or F
+    result = get_result(n, @board[col][row])
+
+
+  end
+
+  def get_result(n, live)
+    if n < 2 && live
+      # die
+    elsif n > 3 && live
+      #die
+
   end
 end
