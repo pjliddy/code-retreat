@@ -3,23 +3,15 @@ class Game
   def initialize(size)
     @size = size
     @board = Array.new(10) { Array.new(10, false) }
-
-    self.checkBoard
   end
 
   def checkBoard
-    go = true
-
-    while go do
+    @temp_board = @board # copy not reference
      @board.each_with_index do |x, xi|
       x.each_with_index do |y, yi|
-        total = checkSquare(xi, yi)
+        checkSquare(xi, yi)
       end
     end
-  end
-end
-
-
   end
 
   def checkSquare(x,y)
