@@ -1,8 +1,13 @@
+# class
 
 class Game
   def initialize(size)
     @size = size
     @board = Array.new(10) { Array.new(10, false) }
+  end
+
+  def random_init(p)
+    # return a 1 p percent of the time
   end
 
   def checkBoard
@@ -14,6 +19,11 @@ class Game
     end
 
     @board = @temp_board
+
+    # if any square on the board is true
+      # do it against
+    # if no true squares
+      # game over
   end
 
   def checkSquare(x,y)
@@ -22,30 +32,34 @@ class Game
       x_min = x - 1
     else
       x_min = 0
+    end
 
     if x < size - 1
       x_max = x + 1
     else
       x_max = size - 1
+    end
 
     if y > 0
       y_min = y - 1
     else
       y_min = 0
+    end
 
     if y < size - 1
       y_max = y + 1
     else
       y_max = size - 1
+    end
 
     n = 0
 
     (x_min..x_max).each do |col|
       (y_min..y_max).each do |row|
         # if not center, check is alive
-          if (col != x && row != y) && @board[col][row] == true
-            n += 1
-          end
+        if (col != x && row != y) && @board[col][row] == true
+          n += 1
+        end
       end
     end
 
@@ -68,12 +82,4 @@ class Game
       true
     end
   end
-
-  # def live(x,y)
-  #   @board[x][y] = true
-  # end
-  #
-  # def die(x,y)
-  #   @board[x][y] = false
-  # end
 end
