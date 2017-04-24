@@ -1,13 +1,28 @@
 # class
 
+require 'pry'
+
 class Game
   def initialize(size)
     @size = size
-    @board = Array.new(10) { Array.new(10, false) }
+    @board = Array.new(@size) { Array.new(@size, random_init(20)) }
+    puts @board
+    checkBoard # run perpetually until empty
   end
 
   def random_init(p)
     # return a 1 p percent of the time
+    num = rand * 100
+
+    if num < p
+      puts "#{p} of #{num} = #{result}"
+      result = true
+    else
+      puts "#{p} of #{num} = #{result}"
+      result = false
+    end
+
+    result
   end
 
   def checkBoard
@@ -21,9 +36,9 @@ class Game
     @board = @temp_board
 
     # if any square on the board is true
-      # do it against
-    # if no true squares
-      # game over
+    # if @board.any? { true }
+    #   checkBoard
+    # end
   end
 
   def checkSquare(x,y)
@@ -34,10 +49,10 @@ class Game
       x_min = 0
     end
 
-    if x < size - 1
+    if x < @size - 1
       x_max = x + 1
     else
-      x_max = size - 1
+      x_max = @size - 1
     end
 
     if y > 0
@@ -46,16 +61,17 @@ class Game
       y_min = 0
     end
 
-    if y < size - 1
+    if y < @size - 1
       y_max = y + 1
     else
-      y_max = size - 1
+      y_max = @size - 1
     end
 
     n = 0
 
     (x_min..x_max).each do |col|
       (y_min..y_max).each do |row|
+        # puts x, y
         # if not center, check is alive
         if (col != x && row != y) && @board[col][row] == true
           n += 1
@@ -83,3 +99,6 @@ class Game
     end
   end
 end
+
+binding.pry
+''
