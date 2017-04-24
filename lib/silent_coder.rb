@@ -12,6 +12,8 @@ class Game
         @temp_board[xi][yi] = checkSquare(xi, yi)
       end
     end
+
+    @board = @temp_board
   end
 
   def checkSquare(x,y)
@@ -49,30 +51,29 @@ class Game
 
     # total neighbors = n
     # don't return total, evaluate against rules & return T or F
-    result = get_result(n, x, y)
-
-
+    result = handle_result(n, x, y)
+    result
   end
 
-  def get_result(n, x, y)
+  def handle_result(n, x, y)
     live = @board[x][y]
 
     if n < 2 && live
-      self.die(x,y)
+      false
     elsif n > 3 && live
-      self.die(x,y)
+      false
     elsif (n == 2 || n == 3) && live
-      self.live(x,y)
+      true
     elsif n == 3 && !live
-      self.live(x,y)
+      true
     end
   end
 
-  def live(x,y)
-    @board[x][y] = true
-  end
-
-  def die(x,y)
-    @board[x][y] = false
-  end
+  # def live(x,y)
+  #   @board[x][y] = true
+  # end
+  #
+  # def die(x,y)
+  #   @board[x][y] = false
+  # end
 end
