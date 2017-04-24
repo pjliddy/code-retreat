@@ -59,6 +59,10 @@ class Game
       # die
     elsif n > 3 && live
       #die
-
+    elsif (n == 2 || n == 3) && live
+      # live (do nothing)
+    elsif (n == 3 && not live)
+    # live
+    end
   end
 end
